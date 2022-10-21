@@ -6,6 +6,7 @@ const initModels = require("./models/initModel");
 //* Routes
 const port = require("./config").port;
 const categoriesRouter = require("./categories/categories.router");
+const postsRouter = require("./posts/posts.router");
 const userRouter = require("./users/users.router");
 const authRouter = require("./auth/auth.router");
 
@@ -30,6 +31,7 @@ initModels();
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/categories", categoriesRouter);
+app.use("/api/v1/posts", postsRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({

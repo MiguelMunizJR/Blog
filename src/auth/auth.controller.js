@@ -2,7 +2,7 @@
 //? El email es unico en mi base de datos
 
 const { getUserByEmail } = require("../users/users.controller");
-const { comparePass } = require("../utils/crypto");
+const { comparePass } = require('../utils/crypto');
 
 const loginUser = async (email, password) => {
   //TODO: Este controlador tiene 2 posibles respuestas

@@ -25,7 +25,7 @@ const login = (req, res) => {
           });
         } else {
           res.status(401).json({
-            message: "Invalid Credentials!!",
+            message: "Invalid Credentials",
           });
         }
       })

@@ -1,12 +1,12 @@
 //? Dependencies
 const uuid = require("uuid");
 const Users = require("../models/users.model");
-const hashPass = require("../utils/crypto").hashPass;
+const { hashPass } = require('../utils/crypto');
 
 const getAllUsers = async () => {
   const data = await Users.findAll({
     where: {
-      status: "is_active",
+      status: "active",
     },
   });
   return data;
@@ -60,7 +60,7 @@ const getUserByEmail = async (email) => {
   const data = await Users.findOne({
     where: {
       email,
-      status: "is_active",
+      status: "active",
     },
   });
   return data;

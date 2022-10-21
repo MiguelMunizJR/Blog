@@ -35,7 +35,7 @@ const getCategoryById = (req, res) => {
 };
 
 const createCategory = (req, res) => {
-  const name = req.body;
+  const {name} = req.body;
 
   if (name) {
     categoriesControllers

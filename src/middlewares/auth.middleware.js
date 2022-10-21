@@ -27,9 +27,10 @@ module.exports = (passport) => {
         const response = await getUserById(decoded.id);
         if (!response) {
           return done(null, false);
+        } else {
+          console.log("decoded JWT", decoded);
+          return done(null, decoded);
         }
-        console.log("decoded JWT", decoded);
-        return done(null, decoded);
       } catch (error) {
         return done(error, false);
       }
