@@ -35,7 +35,7 @@ const Posts = db.define("posts", {
     allowNull: false,
     field: "category_id",
     references: {
-      key: id,
+      key: "id",
       model: Categories,
     },
   },

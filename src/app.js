@@ -1,12 +1,13 @@
 //* Dependencies
 const express = require("express");
 const db = require("./utils/database");
-const initModels = require('./models/initModel');
+const initModels = require("./models/initModel");
 
 //* Routes
 const port = require("./config").port;
+const categoriesRouter = require("./categories/categories.router");
 const userRouter = require("./users/users.router");
-const authRouter = require('./auth/auth.router');
+const authRouter = require("./auth/auth.router");
 
 //* Initial Config
 const app = express();
@@ -25,9 +26,10 @@ db.sync()
 //* Init Models
 initModels();
 
-//* Prefijos:
+//* Prefijos de rutas:
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/categories", categoriesRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({
