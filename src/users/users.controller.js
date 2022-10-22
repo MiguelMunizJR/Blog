@@ -1,7 +1,7 @@
 //? Dependencies
 const uuid = require("uuid");
 const Users = require("../models/users.model");
-const { hashPass } = require('../utils/crypto');
+const { hashPass } = require("../utils/crypto");
 
 const getAllUsers = async () => {
   const data = await Users.findAll({

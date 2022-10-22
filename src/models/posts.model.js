@@ -19,10 +19,10 @@ const Posts = db.define("posts", {
     allowNull: false,
   },
   //? Llave foranea de Users
-  createdBy: {
+  userId: {
     type: datatypes.UUID,
     allowNull: false,
-    field: "created_by",
+    field: "user_id",
     references: {
       //? Key: con que la relacionaremos.
       key: "id",

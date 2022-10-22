@@ -13,6 +13,48 @@ const getAllPosts = (req, res) => {
     });
 };
 
+const getPostById = (req, res) => {
+  const id = req.params.id;
+
+  postsController
+    .getPostById(id)
+    .then((response) => {
+      if (response) {
+        res.status(200).json(response);
+      } else {
+        res.status(404).json({
+          message: "Invalid ID",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({
+        message: err.message,
+      });
+    });
+};
+
+const getPostsByCategory = (req, res) => {
+  const categoryId = req.params.id;
+
+  postsController
+    .getPostsByCategory(categoryId)
+    .then((response) => {
+      if (response[0]) {
+        res.status(200).json(response);
+      } else {
+        res.status(400).json({
+          message: "Empty Category"
+        })
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({
+        message: err.message,
+      });
+    });
+};
+
 const createPost = (req, res) => {
   const userId = req.user.id;
   const { title, content, categoryId } = req.body;
@@ -48,4 +90,6 @@ const createPost = (req, res) => {
 module.exports = {
   createPost,
   getAllPosts,
+  getPostById,
+  getPostsByCategory,
 };
