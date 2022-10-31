@@ -3,9 +3,13 @@ const uuid = require("uuid");
 const Users = require("../models/users.model");
 const Categories = require("../models/categories.model");
 
-const getAllPosts = async () => {
+const getAllPosts = async (offset, limit) => {
   const data = await Posts.findAll({
     //? Include nos ayuda a hacer los joins
+    //* Offset: Donde comienza.
+    //* Limit: Donde termina.
+    offset: offset ? offset : 0,
+    limit: limit ? limit : 10,
     attributes: {
       exclude: ["userId", "categoryId", "createdAt", "updatedAt"],
     },

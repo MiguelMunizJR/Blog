@@ -1,10 +1,18 @@
 const postsController = require("./posts.controller");
 
 const getAllPosts = (req, res) => {
+  //? localhost:9000/api/v1/posts?offset=0&limit=20
+  const { offset, limit } = req.query;
+
   postsController
-    .getAllPosts()
+  //* Pasamos el offset y limit a nuestro controlador
+    .getAllPosts(offset, limit)
     .then((response) => {
-      res.status(200).json(response);
+      res.status(200).json({
+        offset,
+        limit,
+        results: response,
+      });
     })
     .catch((err) => {
       res.status(400).json({
@@ -44,8 +52,8 @@ const getPostsByCategory = (req, res) => {
         res.status(200).json(response);
       } else {
         res.status(400).json({
-          message: "Empty Category"
-        })
+          message: "Empty Category",
+        });
       }
     })
     .catch((err) => {
