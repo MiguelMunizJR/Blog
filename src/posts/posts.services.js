@@ -1,17 +1,38 @@
 const postsController = require("./posts.controller");
+const { host } = require("../config");
 
 const getAllPosts = (req, res) => {
   //? localhost:9000/api/v1/posts?offset=0&limit=20
-  const { offset, limit } = req.query;
+  //! Offset: donde inicia.
+  //! Limit: cantidad maxima de entidades a mostrar por página.
+  const offset = Number(req.query.offset) || 0;
+  const limit = Number(req.query.limit) || 10;
+
+  const urlBase = `${host}/api/v1/posts`;
 
   postsController
-  //* Pasamos el offset y limit a nuestro controlador
+    //* Pasamos el offset y limit a nuestro controlador
     .getAllPosts(offset, limit)
     .then((response) => {
+      //? Comprobamos si hay items suficientes para paginar hacia adelante, de lo contrario mostramos NULL
+      const nextPage =
+        response.count - offset >= limit
+          ? `${urlBase}?offset=${offset + limit}&limit=${limit}`
+          : null;
+
+      //? Comprobamos si hay items suficientes para paginar hacia atrás, de lo contrario mostramos NULL
+      const prevPage =
+        offset - limit >= 0
+          ? `${urlBase}?offset=${offset - limit}&limit=${limit}`
+          : null;
+
       res.status(200).json({
+        prev: prevPage,
+        next: nextPage,
+        items: response.count,
         offset,
         limit,
-        results: response,
+        results: response.rows,
       });
     })
     .catch((err) => {
