@@ -30,8 +30,6 @@ const getAllPosts = (req, res) => {
         prev: prevPage,
         next: nextPage,
         items: response.count,
-        offset,
-        limit,
         results: response.rows,
       });
     })
